@@ -1,31 +1,221 @@
 import random as rand
 
-cards = []
-suits = ["spades", "hearts", "clubs", "diamonds"]
-ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 
-for suit in suits:
-    for rank in ranks:
-        cards.append([suit, rank])
-
-
-def shuffle() -> list:
+class Card:
     """
-    Shuffles our list of cards
+    Used to represent the cards, their ranks and suits.
     """
-    rand.shuffle(cards)
+
+    def __init__(self, suit, rank):
+        self.suit = suit
+        self.rank = rank
+
+    def __str__(self):
+        return f"{self.rank['rank']} of {self.suit}"
 
 
-def deal() -> list:
-    """This will deal a single card from a full, shuffled deck.
-
-    Returns:
-        a single card from our deck
+class Deck:
     """
-    hand = cards.pop()
-    return hand
+    Used to represent the deck we are playing from.
+    """
+
+    def __init__(self):
+        self.cards = []
+        suits = ["hearts", "diamonds", "clubs", "spades"]
+        ranks = [
+            {"rank": "A", "value": 11},
+            {"rank": "2", "value": 2},
+            {"rank": "3", "value": 3},
+            {"rank": "4", "value": 4},
+            {"rank": "5", "value": 5},
+            {"rank": "6", "value": 6},
+            {"rank": "7", "value": 7},
+            {"rank": "8", "value": 8},
+            {"rank": "9", "value": 9},
+            {"rank": "10", "value": 10},
+            {"rank": "J", "value": 10},
+            {"rank": "Q", "value": 10},
+            {"rank": "K", "value": 10},
+        ]
+        for suit in suits:
+            for rank in ranks:
+                self.cards.append(Card(suit, rank))
+
+    def shuffle(self):
+        """
+        Shuffle self.cards to create a shuffled deck
+        """
+        if len(self.cards) > 1:
+            rand.shuffle(self.cards)
+
+    def deal(self, number: int) -> list:
+        """
+        Select and remove cards from self.cards . deck.shuffle first
+
+        Args:
+            number (int): number of cards to be dealt
+
+        Returns:
+            list: The cards that have been removed from self.cards
+        """
+        cards_dealt = []
+        if len(self.cards) >= number >= 0:
+            for i in range(number):
+                card = self.cards.pop()
+                cards_dealt.append(card)
+        else:
+            raise ValueError(
+                "arg 'number' must be greater than 0 and less than len(self.cards)"
+            )
+
+        return cards_dealt
 
 
-shuffle()
-hand = deal()
-print(hand)
+class Hand:
+    def __init__(self, dealer=False):
+        """
+        Initialises hand.
+
+        Args:
+            dealer (bool, optional): Only true for dealer hand. Defaults to False.
+        """
+        self.cards = []
+        self.value = 0
+        self.dealer = dealer
+
+    def take_cards(self, card_list: list):
+        """
+        Use to deal new cards to a hand.
+
+        Args:
+            card_list (list): The cards dealt, use self.deal on deck to create.
+        """
+        self.cards.extend(card_list)
+
+    def calc_value(self):
+        """
+        Calculates Hand value and updates self.value
+        """
+        self.value = 0
+        ace_count = 0
+        for card in self.cards:
+            card_value = int(card.rank["value"])
+            self.value += card_value
+            if card.rank["rank"] == "A":
+                ace_count += 1
+
+        while ace_count > 0 and self.value > 21:
+            self.value -= 10
+            ace_count -= 1
+
+    def get_value(self):
+        """
+        Returns Hand value.
+
+        Returns:
+            Int: Hand value
+        """
+        self.calc_value()
+        return self.value
+
+    def isblackjack(self):
+        """
+        Checks for a win (a blackjack)
+        Returns:
+            Bool: True for a win.
+        """
+        return self.get_value() == 21
+
+    def display(self, show_dealer_cards=False):
+        print(f"""'{"Dealer" if self.dealer else "Your"} hand contains: """)
+        for index, card in enumerate(self.cards):
+            if (
+                index == 0
+                and self.dealer
+                and not (show_dealer_cards or self.isblackjack())
+            ):
+                print("Hidden")
+            else:
+                print(card)
+        if not self.dealer:
+            print("Value: ", self.get_value())
+
+
+class Game:
+    def __init__(self):
+        pass
+
+    def play(self):
+        game_number = 0
+        games_to_play = 0
+
+        while games_to_play <= 0:
+            try:
+                games_to_play = int(input("How many games do you want to play?"))
+            except:
+                print("Input must be a positive integer number")
+
+        while game_number < games_to_play:
+            game_number += 1
+
+            deck = Deck()
+            deck.shuffle()
+
+            player_hand = Hand()
+            dealer_hand = Hand(dealer=True)
+
+            for i in range(2):
+                player_hand.take_cards(deck.deal(1))
+                dealer_hand.take_cards(deck.deal(1))
+
+            print(f"\n" + "*" * 20)
+            print(f"Game {game_number} of {games_to_play}")
+            print("*" * 20)
+
+            player_hand.display()
+            dealer_hand.display()
+
+            if self.check_winner(player_hand, dealer_hand):
+                continue
+            
+            choice = ""
+            while player_hand.get_value() < 21 and choice not in ['s', 'stand']:
+                choice = input("Please choose 'Hit' or 'Stand'").lower()
+                print()
+                while choice not in ['s', 'stand', 'h','hit']:
+                    choice = input("Please choose 'Hit")
+
+    def check_winner(self, player_hand: Hand, dealer_hand: Hand, game_over = False):
+        """
+        Checks for a winner
+        Args:
+            player_hand (Hand): Hand class
+            dealer_hand (Hand): Hand class
+            game_over (bool, optional): Only true if both players have chosen stand. Defaults to False.
+
+        Returns:
+            False (if no winner yet) or Str (if there is a winner)
+        """
+        if not game_over:
+            if player_hand.get_value() >21:
+                print("You busted, Dealer Wins")
+            elif dealer_hand.get_value() > 21:
+                print("Dealer busted, You win!!!")
+            elif player_hand.isblackjack() and dealer_hand.isblackjack():
+                print("Both players have Blackjack, it's a tie.")
+            elif player_hand.isblackjack():
+                print("You have Blackjack, You win!!!")
+            elif dealer_hand.isblackjack():
+                print("Dealer has Blackjack, You lose.")
+            else:
+                if player_hand.get_value() > dealer_hand.get_value():
+                    print("Well done, you win!!!")
+                elif player_hand.get_value() < dealer_hand.get_value():
+                    print("Peak, you Lose")
+                elif player_hand.get_value() == dealer_hand.get_value():
+                    print("It's a tie.")
+        return False
+            
+
+g = Game()
+g.play()
