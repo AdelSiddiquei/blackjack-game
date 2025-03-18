@@ -142,9 +142,7 @@ class Hand:
 
 
 class Game:
-    def __init__(self):
-        pass
-
+    
     def play(self):
         game_number = 0
         games_to_play = 0
@@ -208,7 +206,7 @@ class Game:
             print("Your hand: ", player_hand_value)
             print(f"Dealer's hand: {dealer_hand_value}")
 
-            self.check_winner(player_hand, dealer_hand, game_ove=True)
+            self.check_winner(player_hand, dealer_hand, game_over=True)
         print("\n Thank you for playing!!!")
 
     def check_winner(self, player_hand: Hand, dealer_hand: Hand, game_over=False):
@@ -251,4 +249,5 @@ class Game:
         return False
 
 
-
+g = Game()
+g.play()
