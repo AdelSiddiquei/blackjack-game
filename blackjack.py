@@ -192,6 +192,25 @@ class Game:
             if self.check_winner(player_hand, dealer_hand):
                 continue
 
+            player_hand_value = player_hand.get_value()
+            dealer_hand_value = dealer_hand.get_value()
+
+            while dealer_hand_value < 17:
+                dealer_hand.take_cards(deck.deal(1))
+                dealer_hand_value = dealer_hand.get_value()
+
+            dealer_hand.display(show_dealer_cards=True)
+
+            if self.check_winner(player_hand, dealer_hand):
+                continue
+
+            print("Final Results")
+            print("Your hand: ", player_hand_value)
+            print(f"Dealer's hand: {dealer_hand_value}")
+
+            self.check_winner(player_hand, dealer_hand, game_ove=True)
+        print("\n Thank you for playing!!!")
+
     def check_winner(self, player_hand: Hand, dealer_hand: Hand, game_over=False):
         """
         Checks for a winner
@@ -232,5 +251,4 @@ class Game:
         return False
 
 
-g = Game()
-g.play()
+
