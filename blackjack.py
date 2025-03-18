@@ -207,12 +207,12 @@ class Game:
                 print("You have Blackjack, You win!!!")
             elif dealer_hand.isblackjack():
                 print("Dealer has Blackjack, You lose.")
-            else:
-                if player_hand.get_value() > dealer_hand.get_value():
+        else:
+            if player_hand.get_value() > dealer_hand.get_value():
                     print("Well done, you win!!!")
-                elif player_hand.get_value() < dealer_hand.get_value():
+            elif player_hand.get_value() < dealer_hand.get_value():
                     print("Peak, you Lose")
-                elif player_hand.get_value() == dealer_hand.get_value():
+            elif player_hand.get_value() == dealer_hand.get_value():
                     print("It's a tie.")
         return False
             
