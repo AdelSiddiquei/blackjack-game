@@ -7,6 +7,11 @@ class Card:
     """
 
     def __init__(self, suit: Literal["hearts", "diamonds", "clubs", "spades"], rank: dict):
+        """
+        Args:
+            suit : ["hearts", "diamonds", "clubs", "spades"]
+            rank (dict): {'rank' : str , 'value' : int}
+        """
         self.suit = suit
         self.rank = rank
 
