@@ -1,12 +1,12 @@
-import random as rand
-
+from random import shuffle
+from typing import Literal
 
 class Card:
     """
     Used to represent the cards, their ranks and suits.
     """
 
-    def __init__(self, suit, rank):
+    def __init__(self, suit: Literal["hearts", "diamonds", "clubs", "spades"], rank: dict):
         self.suit = suit
         self.rank = rank
 
@@ -46,7 +46,7 @@ class Deck:
         Shuffle self.cards to create a shuffled deck
         """
         if len(self.cards) > 1:
-            rand.shuffle(self.cards)
+            shuffle(self.cards)
 
     def deal(self, number: int) -> list:
         """
