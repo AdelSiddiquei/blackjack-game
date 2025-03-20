@@ -1,12 +1,15 @@
 from random import shuffle
 from typing import Literal
 
+
 class Card:
     """
     Used to represent the cards, their ranks and suits.
     """
 
-    def __init__(self, suit: Literal["hearts", "diamonds", "clubs", "spades"], rank: dict):
+    def __init__(
+        self, suit: Literal["hearts", "diamonds", "clubs", "spades"], rank: dict
+    ):
         """
         Args:
             suit : ["hearts", "diamonds", "clubs", "spades"]
