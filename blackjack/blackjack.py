@@ -24,7 +24,7 @@ class Card:
 
 class Deck:
     """
-    Used to represent the deck we are playing from.
+    Used to represent the deck we are playing from. List stored in self.cards attribute.
     """
 
     def __init__(self):
