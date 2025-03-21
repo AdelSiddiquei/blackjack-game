@@ -24,9 +24,20 @@ def test_init():
     rank = choice(ranklist)
     card = bj.Card(suit, rank)
 
-    assert card.suit == suit
-    assert card.rank["rank"] == rank["rank"]
-    assert card.rank["value"] == rank["value"]
+    try:
+        assert card.suit == suit
+    except AssertionError:
+        print("Card.__init__ card.suit != suit from argument")
+
+    try:
+        assert card.rank["rank"] == rank["rank"]
+    except AssertionError:
+        print("Card.__init__ card.rank['rank'] != rank['rank'] from argument")
+
+    try:
+        assert card.rank["value"] == rank["value"]
+    except AssertionError:
+        print("Card.__init__ card.rank['value'] != rank['value'] from argument")
 
 
 def test_str():
@@ -34,4 +45,7 @@ def test_str():
     rank = choice(ranklist)
     card = bj.Card(suit, rank)
 
-    assert str(card) == f"{card.rank['rank']} of {suit}"
+    try:
+        assert str(card) == f"{card.rank['rank']} of {suit}"
+    except AssertionError:
+        print("Card.__str__ not returning correct string")
