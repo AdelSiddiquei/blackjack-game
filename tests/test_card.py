@@ -27,17 +27,17 @@ def test_init():
     try:
         assert card.suit == suit
     except AssertionError:
-        print("Card.__init__ card.suit != suit from argument")
+        print("Card.__init__(), card.suit != suit from argument")
 
     try:
         assert card.rank["rank"] == rank["rank"]
     except AssertionError:
-        print("Card.__init__ card.rank['rank'] != rank['rank'] from argument")
+        print("Card.__init__(), card.rank['rank'] != rank['rank'] from argument")
 
     try:
         assert card.rank["value"] == rank["value"]
     except AssertionError:
-        print("Card.__init__ card.rank['value'] != rank['value'] from argument")
+        print("Card.__init__(), card.rank['value'] != rank['value'] from argument")
 
 
 def test_str():
@@ -48,4 +48,4 @@ def test_str():
     try:
         assert str(card) == f"{card.rank['rank']} of {suit}"
     except AssertionError:
-        print("Card.__str__ not returning correct string")
+        print("Card.__str__() not returning correct string")
