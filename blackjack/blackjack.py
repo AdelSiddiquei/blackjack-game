@@ -135,7 +135,7 @@ class Hand:
         return self.get_value() == 21
 
     def display(self, show_dealer_cards=False):
-        print(f"""'{"Dealer" if self.dealer else "Your"} hand contains: """)
+        print(f"{'Dealer' if self.dealer else 'Your'} hand contains: ")
         for index, card in enumerate(self.cards):
             if (
                 index == 0
