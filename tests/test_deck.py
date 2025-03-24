@@ -21,27 +21,17 @@ ranklist = [
 
 def test_init():
     deck = bj.Deck()
-    try:
-        assert len(deck.cards) == len(suitlist)*len(ranklist)  # checking correct deck size
-    except AssertionError:
-        print("Deck.__init__(), Deck.cards incorrect size")
-    
-    try:
-        assert len(deck.cards) == len(set(deck.cards))  # checking no duplicates
-    except AssertionError:
-        print("Deck.__init__(),Deck.cards contains duplicates")
-    
-    for card in deck.cards:
-        
-        try:
-            assert (card.suit in suitlist)
-        except AssertionError:
-            print("Deck.__init__(), Deck.cards has Card with unexpected suit")
 
-        try:
-            assert card.rank in ranklist
-        except AssertionError:
-            print("Deck.__init__(), Deck.cards has Card with unexpected rank")
+    assert len(deck.cards) == len(suitlist) * len(
+        ranklist
+    )  # checking correct deck size
+
+    assert len(deck.cards) == len(set(deck.cards))  # checking no duplicates
+
+    for card in deck.cards:
+        assert card.suit in suitlist
+
+        assert card.rank in ranklist
 
 
 def test_shuffle():
@@ -49,20 +39,12 @@ def test_shuffle():
     original_deck = deck.cards.copy()
     deck.shuffle()
 
-    try:
-        assert set(original_deck) == set(deck.cards)
-    except AssertionError:
-        print("Deck.shuffle() has changed the elements in Deck.cards")
-    
-    try:
-        assert len(original_deck) == len(deck.cards)
-    except AssertionError:
-        print("Deck.shuffle() has changed the size of Deck.cards")
+    assert set(original_deck) == set(deck.cards)
 
-    try:
-        assert original_deck != deck.cards
-    except AssertionError:
-        print("if test_shuffle() has not returned any other messages then Deck.shuffle() has not shuffled Deck.cards")
+    assert len(original_deck) == len(deck.cards)
+
+    assert original_deck != deck.cards
+
 
 def test_deal():
     deck = bj.Deck()
@@ -70,19 +52,8 @@ def test_deal():
     cards_dealt = []
     cards_dealt.extend(deck.deal(randrange(1, len(deck.cards))))
 
-    try:
-        assert set(original_deck) != set(deck.cards)
-    except AssertionError:
-        print("Deck.Deal(), deck.cards has stayed the same")
-    
-    try:
-        assert set(cards_dealt) <= set(original_deck)
-    except AssertionError:
-        print("Deck.Deal(), cards dealt not from original deck.cards")
-    
-    try:
-        assert not set(cards_dealt).issubset(set(deck.cards))
-    except AssertionError:
-        print("Deck.Deal(), cards dealt not removed from deck.cards")
-    
+    assert set(original_deck) != set(deck.cards)
 
+    assert set(cards_dealt) <= set(original_deck)
+
+    assert not set(cards_dealt) <= set(deck.cards)
