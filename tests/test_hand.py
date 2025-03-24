@@ -110,4 +110,3 @@ def test_display_hand(capsys):
     assert "Hidden" not in captured.out
     assert "A of spades" in captured.out
     assert "7 of clubs" in captured.out
-
