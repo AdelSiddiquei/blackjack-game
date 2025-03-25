@@ -15,5 +15,4 @@ COPY . .
 
 # Command to run to start a game.
 # CMD ["tail", "-f", "/dev/null"]
-# CMD ["echo", "hello"]
 CMD ["python", "play_game.py"]
