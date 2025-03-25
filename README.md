@@ -6,7 +6,7 @@ Made of 4 classes Card, Deck, Hand and Game. The first 3 are used to represent t
 Currently it is 1 player vs the dealer playing a standard game of casino blackjack from a single deck.
 
 ## Instalation
-First clone the repo.
+This package comes with a variety of options for environment management. Installation instructions using Conda, Venv and Docker are below. Please use whichever is most convenient for you.
 ### Conda
 Run  
 ```bash
@@ -53,6 +53,13 @@ To play, run:
 play_game.py 
 ```
 If using docker then a game should run when starting the container.
+
+## Testing
+This package has been structured so that the tests in ./tests can all be run by running: 
+```bash
+pytest
+```
+in your cli.
 
 ## License
 Unlicense, contained seperately in file named LICENSE at ./license.
