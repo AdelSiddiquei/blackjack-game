@@ -7,8 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY requirements.txt .
 
-# Install any dependencies (using requirements.txt or environment.yaml)
-# If you're using a requirements.txt file
+# Install any dependencies (using requirements.txt)
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
