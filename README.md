@@ -27,6 +27,7 @@ source venv/bin/activate
 To create and activate a Venv called venv, now run  
 ```bash
 pip install -r requirements.txt  
+
 to install dependancies. Now run  
 pip install .  
 ```
@@ -39,9 +40,9 @@ docker build -t blackjack-game
 ```
 To build the docker image and name it blackjack-game, then run:  
 ```bash
-docker run blackjack-game  
+docker run -i blackjack-game  
 ```
-To start a container based on the image.
+To start a container based on the image in interactive mode to allow you to play a game.
 
 
 
