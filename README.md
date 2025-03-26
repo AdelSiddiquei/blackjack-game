@@ -1,12 +1,12 @@
 # blackjack-game
 This is a Blackjack game coded in Python.
-Made of 4 classes Card, Deck, Hand and Game. The first 3 are used to represent the cards, deck and hands in a real blackjack game whilst the Game class controls the gameplay itself.
+Made of 4 classes `Card`, `Deck`, `Hand` and `Game`. The first 3 are used to represent the cards, deck and hands in a real blackjack game whilst the `Game` class controls the gameplay itself.
 
 ## Features
 Currently it is 1 player vs the dealer playing a standard game of casino blackjack from a single deck.
 
 ## Instalation
-This package comes with a variety of options for environment management. Installation instructions using Conda, Venv and Docker are below. Please use whichever is most convenient for you.
+This package comes with a variety of options for environment management. Installation instructions using Conda, Venv and Docker are below. After cloning the repo, please use whichever is most convenient for you.
 ### Conda
 Run  
 ```bash
