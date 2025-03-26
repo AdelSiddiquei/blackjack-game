@@ -28,8 +28,9 @@ source venv/bin/activate
 To create and activate a Venv called venv, now run  
 ```bash
 pip install -r requirements.txt  
-
+```
 to install dependancies. Now run  
+```bash
 pip install .  
 ```
 To install the package to your environment.
